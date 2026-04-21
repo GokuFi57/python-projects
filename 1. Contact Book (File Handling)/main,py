@@ -1,0 +1,30 @@
+import json
+
+def add_contact():
+    name = input("Enter name: ")
+    phone = input("Enter phone: ")
+    
+    try:
+        with open("contacts.json", "r") as f:
+            contacts = json.load(f)
+    except:
+        contacts = {}
+
+    contacts[name] = phone
+
+    with open("contacts.json", "w") as f:
+        json.dump(contacts, f)
+
+    print("Contact saved!")
+
+def view_contacts():
+    try:
+        with open("contacts.json", "r") as f:
+            contacts = json.load(f)
+            for name, phone in contacts.items():
+                print(name, ":", phone)
+    except:
+        print("No contacts found")
+
+add_contact()
+view_contacts()
